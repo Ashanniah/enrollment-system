@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Selection - MappleWood Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-light': '#f8fafc',
+                        'accent-primary': '#ab6d2e',
+                        'accent-secondary': '#cb9b6b',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .dash-card { @apply bg-white rounded-2xl p-6 shadow-sm border border-slate-100 transition-shadow hover:shadow-md; }
+            
+            .btn-primary { @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl bg-accent-primary text-white px-5 py-2 transition-all hover:bg-accent-secondary shadow-sm hover:shadow-md text-sm; }
+            .btn-secondary { @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl bg-white border border-slate-200 text-slate-700 px-5 py-2 transition-all hover:bg-slate-50 hover:border-slate-300 text-sm; }
+            .btn-danger { @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl bg-red-50 text-red-600 px-3 py-1.5 transition-all hover:bg-red-100 text-xs; }
+            
+            .input-field { @apply rounded-xl border border-slate-200 bg-white px-4 py-2 text-slate-800 focus:outline-none focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20 transition-all text-sm font-medium; }
+            
+            .nav-item { @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/70 transition-all hover:bg-white/10 hover:text-white overflow-hidden whitespace-nowrap; }
+            .nav-item.active { @apply bg-white/20 text-white; }
+            
+            #sidebar { transition: width 0.3s ease; }
+            #sidebar.collapsed { width: 5.5rem; }
+            #sidebar.collapsed .sidebar-text { display: none; }
+            #sidebar.collapsed .nav-item { justify-content: center; padding-left: 0; padding-right: 0; }
+            #sidebar.collapsed .nav-item svg { margin: 0; }
+            #sidebar.collapsed .sidebar-header { flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem 0.5rem; gap: 1.5rem; }
+            #sidebar.collapsed .profile-block { justify-content: center; padding: 0.5rem; }
+
+            /* Table Styles */
+            .table-container { @apply overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm; }
+            .styled-table { @apply w-full text-left border-collapse min-w-[900px]; }
+            .styled-table thead th { @apply bg-slate-50 text-slate-500 font-bold text-sm py-4 px-4 sticky top-0 z-10 border-b border-slate-200 uppercase tracking-wider; }
+            .styled-table tbody tr { @apply border-b border-slate-100 hover:bg-slate-50/80 transition-colors group cursor-pointer; }
+            .styled-table tbody td { @apply py-4 px-4 align-middle text-sm text-slate-700; }
+            
+            /* Expandable Row */
+            .expandable-row { @apply hidden bg-slate-50/50 border-b border-slate-200 shadow-inner; }
+            tr.expanded + .expandable-row { @apply table-row; }
+        }
+    </style>
+</head>
+
+<body class="bg-bg-light text-slate-800 font-sans h-screen overflow-hidden flex">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-[#6d4424] flex flex-col h-full shrink-0 z-20 overflow-x-hidden">
+        <div class="sidebar-header p-5 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-white rounded-xl p-1.5 shadow-sm shrink-0">
+                    <img src="src/images/mapplewood-logo.png" alt="MappleWood Logo" class="h-8 w-8 object-contain">
+                </div>
+                <h1 class="font-extrabold text-lg text-white leading-tight sidebar-text whitespace-nowrap">MappleWood<br><span class="text-white/70 font-medium text-xs">Portal System</span></h1>
+            </div>
+            <button id="sidebarToggle" class="text-white/70 hover:text-white transition-colors shrink-0 p-1">
+                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 space-y-1">
+            <a href="student-dashboard.html" class="nav-item">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+            <a href="student-enrollment.html" class="nav-item">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span class="sidebar-text">Enrollment</span>
+            </a>
+            <a href="student-courses.html" class="nav-item active">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+                <span class="sidebar-text">Courses</span>
+            </a>
+            <a href="schedule.html" class="nav-item">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                </svg>
+                <span class="sidebar-text">Schedule</span>
+            </a>
+            <a href="academic-records.html" class="nav-item">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
+                </svg>
+                <span class="sidebar-text">Academic Records</span>
+            </a>
+            <a href="student-announcements.html" class="nav-item">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                </svg>
+                <span class="sidebar-text">Announcements</span>
+            </a>
+            <hr class="my-4 border-white/10">
+            <a href="student-settings.html" class="nav-item">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="sidebar-text">Settings</span>
+            </a>
+        </div>
+
+        <div class="p-4 border-t border-white/10">
+            <a href="#" class="profile-block flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-colors group">
+                <div class="w-10 h-10 shrink-0 rounded-full bg-white/10 flex items-center justify-center text-white font-bold border border-white/20">
+                    JD
+                </div>
+                <div class="flex-1 overflow-hidden sidebar-text">
+                    <p class="text-sm font-bold text-white truncate group-hover:text-white transition-colors">John Doe</p>
+                    <p class="text-xs text-white/70 truncate">Student</p>
+                </div>
+            </a>
+            <a href="login.html" class="nav-item mt-2">
+                <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                </svg>
+                <span class="sidebar-text">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 flex flex-col overflow-hidden relative">
+
+        <!-- Top White Header -->
+        <header class="bg-white shadow-sm px-8 py-4 flex justify-between items-center z-10 border-b border-slate-200">
+            <h2 class="text-2xl font-extrabold text-slate-900 hidden sm:block">Course Selection</h2>
+            <div class="flex-1"></div>
+            <div class="flex items-center gap-6">
+                <button class="text-accent-primary hover:text-accent-secondary transition-colors relative">
+                    <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+                    </svg>
+                </button>
+                <img src="src/images/girl-profile.jpg" alt="Profile"
+                    class="w-10 h-10 rounded-full border-2 border-accent-primary object-cover shadow-sm">
+            </div>
+        </header>
+
+        <!-- Scrollable Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-8 lg:p-10 relative bg-[#f4f7f9]">
+
+            <!-- Top Section: Search and Filters -->
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-8">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Available Subjects</h2>
+                    <p class="text-slate-500 font-medium mt-1">Browse and select subjects for the upcoming Fall 2026 Semester.</p>
+                </div>
+                <div class="flex flex-wrap gap-4 w-full lg:w-auto">
+                    <div class="relative flex-1 min-w-[200px]">
+                        <svg class="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" placeholder="Search by code or title..." class="input-field pl-10 w-full">
+                    </div>
+                    <select class="input-field border-slate-200">
+                        <option>All Programs</option>
+                        <option>Computer Science</option>
+                        <option>Information Tech</option>
+                        <option>Business Admin</option>
+                    </select>
+                    <select class="input-field border-slate-200">
+                        <option>All Year Levels</option>
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Main Layout: Table + Sidebar Panel -->
+            <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
+
+                <!-- Main Table Area (Span 3) -->
+                <div class="xl:col-span-3">
+                    <div class="table-container">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th class="w-10"></th>
+                                    <th>Status</th>
+                                    <th>Code</th>
+                                    <th>Subject Title</th>
+                                    <th class="text-center">Units</th>
+                                    <th>Schedule</th>
+                                    <th>Room</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Row 1 (Open) -->
+                                <tr onclick="this.classList.toggle('expanded')" class="hover:bg-blue-50/50">
+                                    <td class="text-center text-slate-300">
+                                        <svg class="w-4 h-4 inline transform transition-transform group-[.expanded]:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                    </td>
+                                    <td>
+                                        <span class="inline-flex items-center gap-1.5 font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider border border-emerald-100">
+                                            🟢 Open
+                                        </span>
+                                    </td>
+                                    <td class="font-extrabold text-slate-900">CS101</td>
+                                    <td class="font-bold text-slate-700">Introduction to Programming</td>
+                                    <td class="text-center font-bold text-slate-600">3</td>
+                                    <td><span class="font-medium text-slate-600 text-xs bg-slate-100 px-2 py-1 rounded">Mon/Wed • 09:00 - 10:30 AM</span></td>
+                                    <td class="text-slate-500 font-medium text-xs">Rm 402</td>
+                                    <td class="text-right" onclick="event.stopPropagation()">
+                                        <button class="btn-primary">Add to Enrollment</button>
+                                    </td>
+                                </tr>
+                                <!-- Expandable Details 1 -->
+                                <tr class="expandable-row">
+                                    <td colspan="8" class="p-0">
+                                        <div class="p-4 px-12 text-sm flex gap-12 bg-white/50">
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Instructor</span>
+                                                <span class="text-slate-700 font-semibold flex items-center gap-2">
+                                                    <div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500">MR</div>
+                                                    Dr. Mark Richards
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Section</span>
+                                                <span class="text-slate-700 font-semibold bg-white border border-slate-200 px-2 py-0.5 rounded">CS-1A</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Prerequisites</span>
+                                                <span class="text-slate-500 font-medium italic">None</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 2 (Waitlist) -->
+                                <tr onclick="this.classList.toggle('expanded')" class="hover:bg-amber-50/30">
+                                    <td class="text-center text-slate-300">
+                                        <svg class="w-4 h-4 inline transform transition-transform group-[.expanded]:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                    </td>
+                                    <td>
+                                        <span class="inline-flex items-center gap-1.5 font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider border border-amber-200/50">
+                                            🟡 Waitlist (3)
+                                        </span>
+                                    </td>
+                                    <td class="font-extrabold text-slate-900">MATH205</td>
+                                    <td class="font-bold text-slate-700">Linear Algebra</td>
+                                    <td class="text-center font-bold text-slate-600">4</td>
+                                    <td><span class="font-medium text-slate-600 text-xs bg-slate-100 px-2 py-1 rounded">Tue/Thu • 01:00 - 03:00 PM</span></td>
+                                    <td class="text-slate-500 font-medium text-xs">Rm 105</td>
+                                    <td class="text-right" onclick="event.stopPropagation()">
+                                        <button class="btn-secondary text-amber-700 border-amber-200 hover:bg-amber-50">Join Waitlist</button>
+                                    </td>
+                                </tr>
+                                <!-- Expandable Details 2 -->
+                                <tr class="expandable-row">
+                                    <td colspan="8" class="p-0">
+                                        <div class="p-4 px-12 text-sm flex gap-12 bg-white/50">
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Instructor</span>
+                                                <span class="text-slate-700 font-semibold flex items-center gap-2">
+                                                    <div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500">AS</div>
+                                                    Prof. Alice Smith
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Section</span>
+                                                <span class="text-slate-700 font-semibold bg-white border border-slate-200 px-2 py-0.5 rounded">CS-2B</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Prerequisites</span>
+                                                <span class="text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded text-xs">MATH101</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 3 (Full) -->
+                                <tr class="opacity-60 grayscale-[30%] bg-slate-50/50 hover:bg-slate-50/50 cursor-not-allowed">
+                                    <td class="text-center text-slate-300">
+                                        <svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" /></svg>
+                                    </td>
+                                    <td>
+                                        <span class="inline-flex items-center gap-1.5 font-bold text-slate-500 bg-slate-200 px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider border border-slate-300">
+                                            🔴 Full
+                                        </span>
+                                    </td>
+                                    <td class="font-extrabold text-slate-700">ENG102</td>
+                                    <td class="font-bold text-slate-600">Advanced Literature</td>
+                                    <td class="text-center font-bold text-slate-500">3</td>
+                                    <td><span class="font-medium text-slate-500 text-xs bg-slate-200/50 px-2 py-1 rounded">Friday • 08:00 - 11:00 AM</span></td>
+                                    <td class="text-slate-500 font-medium text-xs">Rm 201</td>
+                                    <td class="text-right">
+                                        <button class="btn-secondary opacity-50 cursor-not-allowed" disabled>Closed</button>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4 (Open) -->
+                                <tr onclick="this.classList.toggle('expanded')" class="hover:bg-blue-50/50">
+                                    <td class="text-center text-slate-300">
+                                        <svg class="w-4 h-4 inline transform transition-transform group-[.expanded]:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                    </td>
+                                    <td>
+                                        <span class="inline-flex items-center gap-1.5 font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider border border-emerald-100">
+                                            🟢 Open
+                                        </span>
+                                    </td>
+                                    <td class="font-extrabold text-slate-900">PHY301</td>
+                                    <td class="font-bold text-slate-700">Quantum Mechanics</td>
+                                    <td class="text-center font-bold text-slate-600">4</td>
+                                    <td><span class="font-medium text-slate-600 text-xs bg-slate-100 px-2 py-1 rounded">Mon/Wed • 01:00 - 03:00 PM</span></td>
+                                    <td class="text-slate-500 font-medium text-xs">Lab 3</td>
+                                    <td class="text-right" onclick="event.stopPropagation()">
+                                        <button class="btn-primary">Add to Enrollment</button>
+                                    </td>
+                                </tr>
+                                <!-- Expandable Details 4 -->
+                                <tr class="expandable-row">
+                                    <td colspan="8" class="p-0">
+                                        <div class="p-4 px-12 text-sm flex gap-12 bg-white/50">
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Instructor</span>
+                                                <span class="text-slate-700 font-semibold flex items-center gap-2">
+                                                    <div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500">JB</div>
+                                                    Dr. James Brown
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Section</span>
+                                                <span class="text-slate-700 font-semibold bg-white border border-slate-200 px-2 py-0.5 rounded">PHY-3A</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-slate-400 font-bold block mb-1 uppercase text-[10px] tracking-wider">Prerequisites</span>
+                                                <span class="text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded text-xs">PHY201, MATH205</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Column (Selected Subjects Panel) -->
+                <div>
+                    <div class="dash-card sticky top-8 border-accent-primary/20 shadow-lg shadow-accent-primary/5 p-5">
+                        <div class="flex items-center justify-between mb-5">
+                            <h3 class="text-lg font-bold text-slate-900">Selected Subjects</h3>
+                            <div class="bg-accent-primary/10 text-accent-primary px-2.5 py-1 rounded-lg text-xs font-bold border border-accent-primary/20">
+                                7 Units
+                            </div>
+                        </div>
+
+                        <!-- Summary Table -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden mb-5">
+                            <table class="w-full text-left text-sm bg-white">
+                                <tbody class="divide-y divide-slate-100">
+                                    <!-- Selected Item 1 -->
+                                    <tr class="hover:bg-slate-50 transition-colors group">
+                                        <td class="py-2.5 pl-3 pr-2">
+                                            <p class="font-extrabold text-slate-900 text-xs">CS101</p>
+                                            <p class="text-[10px] text-slate-500 font-medium truncate w-32">Intro to Programming</p>
+                                        </td>
+                                        <td class="py-2.5 px-2 text-center">
+                                            <span class="font-bold text-accent-primary text-xs">3U</span>
+                                        </td>
+                                        <td class="py-2.5 pr-3 pl-1 text-right">
+                                            <button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-red-50" title="Remove Subject">
+                                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- Selected Item 2 (Waitlist) -->
+                                    <tr class="hover:bg-slate-50 transition-colors group">
+                                        <td class="py-2.5 pl-3 pr-2">
+                                            <p class="font-extrabold text-slate-900 text-xs flex items-center gap-1">
+                                                MATH205 
+                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" title="Waitlisted"></span>
+                                            </p>
+                                            <p class="text-[10px] text-slate-500 font-medium truncate w-32">Linear Algebra</p>
+                                        </td>
+                                        <td class="py-2.5 px-2 text-center">
+                                            <span class="font-bold text-accent-primary text-xs">4U</span>
+                                        </td>
+                                        <td class="py-2.5 pr-3 pl-1 text-right">
+                                            <button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-red-50" title="Remove Subject">
+                                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-slate-50">
+                                    <tr>
+                                        <td class="py-3 px-3 font-bold text-slate-700 text-xs text-right">Total:</td>
+                                        <td class="py-3 px-2 text-center font-extrabold text-accent-primary text-sm">7U</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div>
+                            <button class="w-full btn-primary py-2.5 text-sm shadow-accent-primary/20 hover:shadow-accent-primary/30">
+                                Confirm Enrollment
+                            </button>
+                            <div class="mt-3 flex items-start gap-2 bg-blue-50 text-blue-800 p-2.5 rounded-lg border border-blue-100">
+                                <svg class="w-4 h-4 shrink-0 mt-0.5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="text-[11px] font-medium leading-tight">You need at least 12 units to be considered a full-time student this semester.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Toggle Sidebar Functionality
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
+
+</body>
+
+</html>

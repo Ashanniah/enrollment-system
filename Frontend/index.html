@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapplewood Academy</title>
+    <meta name="description" content="Next-generation academic enrollment system">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-light': '#ffffff', /* Pure white background */
+                        'accent-primary': '#ab6d2e', /* MappleWood Brown */
+                        'accent-secondary': '#cb9b6b', /* Lighter MappleWood Brown */
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+        .glass-nav { @apply bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm; }
+        .glass-card { @apply bg-white border border-slate-100 rounded-3xl p-10 transition-all duration-300 relative overflow-hidden shadow-xl shadow-slate-200/50; }
+        .glass-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(189,122,54,0.05), transparent); transform: skewX(-20deg); transition: 0.5s; }
+        .glass-card:hover { @apply -translate-y-1 shadow-2xl shadow-slate-200 border-accent-primary/30; }
+        .glass-card:hover::before { left: 200%; }
+        
+        .btn-primary { @apply inline-flex items-center gap-2 font-semibold rounded-full bg-gradient-to-br from-accent-primary to-accent-secondary text-white px-8 py-4 shadow-[0_10px_20px_rgba(189,122,54,0.3)] transition-all duration-300; }
+        .btn-primary:hover { @apply -translate-y-0.5 shadow-[0_15px_25px_rgba(189,122,54,0.4)] brightness-110; }
+        .btn-primary:hover .btn-arrow { @apply translate-x-1; }
+        
+        .btn-secondary { @apply inline-flex items-center gap-2 font-semibold rounded-full bg-white border border-slate-200 text-slate-700 px-6 py-2.5 transition-all duration-300 hover:bg-slate-50 hover:border-slate-300 hover:text-accent-primary; }
+        
+        .btn-login { @apply inline-flex items-center gap-2 font-semibold rounded-full bg-accent-primary text-white px-6 py-2.5 transition-all duration-300 hover:bg-accent-secondary shadow-md; }
+
+        .btn-outline { @apply inline-flex items-center gap-2 font-semibold rounded-full bg-transparent border border-white/60 text-white px-8 py-4 transition-all duration-300 hover:border-white hover:bg-white/10; }
+      }
+      @layer utilities {
+        .text-gradient { @apply bg-gradient-to-br from-white via-orange-50 to-orange-200 bg-clip-text text-transparent; }
+        .fade-in-up { @apply opacity-0 translate-y-8; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .glow-orb { @apply absolute rounded-full blur-[100px] z-0 opacity-40; animation: float 10s infinite ease-in-out alternate; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, -50px) scale(1.1); } }
+      }
+    </style>
+</head>
+
+<body class="bg-bg-light text-slate-900 overflow-x-hidden min-h-screen font-sans">
+
+    <nav class="glass-nav fixed top-0 w-full z-[100]">
+        <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold tracking-tight flex items-center gap-2">
+                <img src="src/images/mapplewood-logo.png" alt="MappleWood Logo" class="h-14">
+            </div>
+            <div class="hidden md:flex gap-8 items-center">
+                <a href="#home"
+                    class="text-slate-600 font-semibold transition-colors duration-200 hover:text-accent-primary">Home</a>
+                <a href="#about"
+                    class="text-slate-600 font-semibold transition-colors duration-200 hover:text-accent-primary">About
+                    Us</a>
+                <a href="#courses"
+                    class="text-slate-600 font-semibold transition-colors duration-200 hover:text-accent-primary">Courses</a>
+                <a href="#contact"
+                    class="text-slate-600 font-semibold transition-colors duration-200 hover:text-accent-primary">Contact</a>
+                <a href="login.html" class="btn-login">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home"
+            class="min-h-screen flex items-center justify-center relative px-8 text-center bg-cover bg-center"
+            style="background-image: linear-gradient(rgba(26, 18, 11, 0.75), rgba(26, 18, 11, 0.85)), url('src/images/school-bg.jpg');">
+            <!-- Glow Orbs (Soft brown glow behind text) -->
+            <div class="glow-orb bg-accent-primary w-[400px] h-[400px] top-[20%] left-[10%]"></div>
+            <div
+                class="glow-orb bg-accent-secondary w-[350px] h-[350px] bottom-[10%] right-[10%] [animation-delay:-5s]">
+            </div>
+
+            <div class="max-w-3xl z-10 pt-20">
+                <h1
+                    class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-6 fade-in-up delay-1 text-white">
+                    The Future of Learning at <br>
+                    <span class="text-gradient">MappleWood Academy</span>
+                </h1>
+
+                <p class="text-xl text-slate-200 leading-relaxed mb-12 font-light max-w-2xl mx-auto fade-in-up delay-2">
+                    Empower your academic journey with our next-generation enrollment system — secure, seamless, and
+                    built for excellence.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up delay-3">
+                    <button class="btn-primary" id="enrollNowBtn">
+                        Enroll Now
+                        <span class="btn-arrow inline-block transition-transform duration-300">→</span>
+                    </button>
+                    <button class="btn-outline">Explore Programs</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="max-w-7xl mx-auto px-8 relative z-10 -mt-24 mb-32">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card fade-in-up">
+                    <div
+                        class="text-4xl mb-6 bg-accent-primary/10 text-accent-primary w-16 h-16 flex items-center justify-center rounded-2xl border border-accent-primary/20 shadow-sm">
+                        📚</div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-800">Real-Time Enrollment</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Secure your classes instantly with live
+                        capacity tracking and waitlist automation.</p>
+                </div>
+
+                <div class="glass-card fade-in-up delay-1">
+                    <div
+                        class="text-4xl mb-6 bg-accent-primary/10 text-accent-primary w-16 h-16 flex items-center justify-center rounded-2xl border border-accent-primary/20 shadow-sm">
+                        ⚡</div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-800">Smart Scheduling</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Our intelligent system prevents conflicts and
+                        builds the perfect schedule for you.</p>
+                </div>
+
+                <div class="glass-card fade-in-up delay-2">
+                    <div
+                        class="text-4xl mb-6 bg-accent-primary/10 text-accent-primary w-16 h-16 flex items-center justify-center rounded-2xl border border-accent-primary/20 shadow-sm">
+                        🔒</div>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-800">Secure Records</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium">Bank-grade encryption keeping your academic
+                        and financial records perfectly safe.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XFBJvMfEVxE=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Grachelle Mae\\enrollment-system\\hash-gen\\hash-gen.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Grachelle Mae\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

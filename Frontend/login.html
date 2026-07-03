@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mapplewood Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-light': '#ffffff',
+                        'accent-primary': '#ab6d2e',
+                        'accent-secondary': '#cb9b6b',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .btn-login { @apply inline-flex items-center justify-center gap-2 font-bold rounded-xl bg-accent-primary text-white px-6 py-4 transition-all duration-300 hover:bg-accent-secondary shadow-lg hover:shadow-xl w-full; }
+            .input-field { @apply w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-slate-800 focus:outline-none focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20 transition-all; }
+        }
+    </style>
+</head>
+
+<body class="text-slate-900 overflow-hidden min-h-screen font-sans bg-cover bg-center flex items-center justify-center"
+    style="background-image: linear-gradient(rgba(26, 18, 11, 0.75), rgba(26, 18, 11, 0.85)), url('src/images/school-bg.jpg');">
+
+    <div
+        class="max-w-4xl w-full mx-8 bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[500px]">
+
+        <!-- Left Side: Logo -->
+        <div
+            class="md:w-5/12 bg-slate-50 border-r border-slate-100 flex flex-col items-center justify-center p-12 relative overflow-hidden">
+            <!-- Decorative background blob -->
+            <div class="absolute w-64 h-64 bg-accent-primary/5 rounded-full blur-3xl -top-10 -left-10"></div>
+            <div class="absolute w-64 h-64 bg-accent-secondary/5 rounded-full blur-3xl -bottom-10 -right-10"></div>
+
+            <!-- Made logo much bigger (h-56) -->
+            <img src="src/images/mapplewood-logo.png" alt="MappleWood Logo"
+                class="h-56 object-contain relative z-10 hover:scale-105 transition-transform duration-500">
+            <h2 class="mt-4 text-xl font-bold text-slate-800 text-center relative z-10">MappleWood Academy</h2>
+            <p class="text-slate-500 text-center mt-2 text-sm relative z-10">Portal Access</p>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="md:w-7/12 p-12 md:p-16 flex flex-col justify-center">
+
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-extrabold text-slate-900 mb-2">Login</h3>
+                <p class="text-slate-500 font-medium">Please sign in to access your dashboard.</p>
+            </div>
+
+            <form id="login-form" action="#" method="POST" class="space-y-6" novalidate>
+                <div>
+                    <label for="email" class="block text-sm font-bold text-slate-700 mb-1.5">Email Address</label>
+                    <input type="email" id="email" class="input-field" placeholder="student@mapplewood.edu">
+                    <p id="email-error" class="text-red-500 text-sm font-semibold mt-1.5 hidden"></p>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-bold text-slate-700 mb-1.5">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" class="input-field pr-12" placeholder="••••••••">
+                        <button type="button" id="toggle-password"
+                            class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors focus:outline-none">
+                            <svg id="eye-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p id="password-error" class="text-red-500 text-sm font-semibold mt-1.5 hidden"></p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <label class="flex items-center text-sm text-slate-600 cursor-pointer group">
+                            <input type="checkbox" id="remember-me" style="accent-color: #ab6d2e;"
+                                class="mr-2 rounded border-slate-300 text-accent-primary focus:ring-accent-primary transition-colors">
+                            <span class="group-hover:text-slate-800 transition-colors">Remember me</span>
+                        </label>
+                        <a href="#"
+                            class="text-sm font-semibold text-accent-primary hover:text-accent-secondary transition-colors">Forgot
+                            Password?</a>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="btn-login">Login</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-5 right-5 transform translate-x-full opacity-0 transition-all duration-300 bg-green-50 border-l-4 border-green-500 p-4 rounded shadow-lg z-50 flex items-center gap-3">
+        <svg class="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <div>
+            <h3 class="font-bold text-green-800 text-sm">Login successful!</h3>
+            <p class="text-green-700 text-xs mt-0.5">Redirecting to dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Login Logic -->
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const rememberMeCheckbox = document.getElementById('remember-me');
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const eyeIcon = document.getElementById('eye-icon');
+        const toast = document.getElementById('toast');
+
+        // SVG strings for Eye and Eye-Slash
+        const eyeSvg = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
+        const eyeSlashSvg = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />';
+
+        // 1. Password Toggle Logic
+        togglePasswordBtn.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            eyeIcon.innerHTML = isPassword ? eyeSlashSvg : eyeSvg;
+        });
+
+        // 2. Remember Me logic (on load)
+        const savedEmail = localStorage.getItem('rememberedEmail');
+        if (savedEmail) {
+            emailInput.value = savedEmail;
+            rememberMeCheckbox.checked = true;
+        }
+
+        // Error handling helpers
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+
+        function showError(inputElement, errorElement, message) {
+            inputElement.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/20');
+            inputElement.classList.remove('border-slate-200', 'focus:border-accent-primary', 'focus:ring-accent-primary/20');
+            if (message) {
+                errorElement.textContent = message;
+                errorElement.classList.remove('hidden');
+            }
+        }
+
+        function clearErrors() {
+            [emailInput, passwordInput].forEach(input => {
+                input.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500/20');
+                input.classList.add('border-slate-200', 'focus:border-accent-primary', 'focus:ring-accent-primary/20');
+            });
+            emailError.classList.add('hidden');
+            passwordError.classList.add('hidden');
+        }
+
+        // 3. Login API Call & Redirect
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearErrors();
+
+            let hasError = false;
+
+            if (!emailInput.value.trim()) {
+                showError(emailInput, emailError, "Please fill out this field.");
+                hasError = true;
+            } else if (!emailInput.value.includes('@')) {
+                showError(emailInput, emailError, "Please enter a valid email address.");
+                hasError = true;
+            }
+
+            if (!passwordInput.value.trim()) {
+                showError(passwordInput, passwordError, "Please fill out this field.");
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // Handle Remember Me (on submit)
+            if (rememberMeCheckbox.checked) {
+                localStorage.setItem('rememberedEmail', emailInput.value);
+            } else {
+                localStorage.removeItem('rememberedEmail');
+            }
+
+            try {
+                // Call our C# API endpoint
+                const response = await fetch('http://localhost:5024/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        email: emailInput.value, 
+                        password: passwordInput.value 
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Show success toast
+                    toast.classList.remove('translate-x-full', 'opacity-0');
+                    
+                    // Wait for the toast to be seen before redirecting
+                    setTimeout(() => {
+                        if (data.role === 'Admin') {
+                            window.location.href = 'admin-dashboard.html';
+                        } else {
+                            window.location.href = 'student-dashboard.html';
+                        }
+                    }, 1500);
+
+                } else {
+                    showError(emailInput, emailError, "");
+                    showError(passwordInput, passwordError, "Invalid email or password. Please try again.");
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError(passwordInput, passwordError, "Could not connect to the server.");
+            }
+        });
+    </script>
+</body>
+
+</html>
