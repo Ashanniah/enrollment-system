@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MappleWood Academy - More</title>
+    <meta name="description" content="More about MappleWood Academy's campus experience.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: 'Outfit', sans-serif;
+            background: #f7efe4;
+            color: #4f3723;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f7efe4;
+            color: #4f3723;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-shell {
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 0 24px 48px;
+        }
+
+        .hero-banner {
+            background: #ab6d2e;
+            color: white;
+            text-align: center;
+            padding: 26px 0;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(171, 109, 46, 0.18);
+            border-radius: 28px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: #ab6d2e;
+            color: white;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-align: center;
+            padding: 22px 20px;
+            font-size: 1.1rem;
+        }
+
+        .panel-body {
+            padding: 34px 36px;
+        }
+
+        .panel-body h3 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 1.75rem;
+            letter-spacing: -0.04em;
+            color: #3f2d1f;
+        }
+
+        .panel-body p,
+        .panel-body li {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #5a4030;
+        }
+
+        .panel-body ul {
+            margin: 16px 0 0;
+            padding-left: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .image-stack {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(171, 109, 46, 0.22);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+            min-height: 260px;
+        }
+
+        .image-stack img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255, 225, 170, 0.24), transparent 30%), linear-gradient(180deg, rgba(255, 244, 226, 0.48), rgba(255, 236, 209, 0.28));
+            pointer-events: none;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(171, 109, 46, 0.2);
+            border-radius: 26px;
+            padding: 28px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .detail-card h4 {
+            margin: 0 0 16px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #5f3b26;
+        }
+
+        .section-title {
+            padding: 22px 0;
+            background: #ab6d2e;
+            color: white;
+            text-align: center;
+            font-size: 3rem;
+            line-height: 1.05;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin: 0 0 24px;
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 80px;
+            height: 2px;
+            background: #bf935b;
+            transform: translateY(-50%);
+        }
+
+        .section-title::before {
+            left: 16px;
+        }
+
+        .section-title::after {
+            right: 16px;
+        }
+
+        .section-title span {
+            font-size: 1.25rem;
+            letter-spacing: 0.36em;
+            font-weight: 900;
+        }
+
+
+        .section-block {
+            margin-bottom: 44px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #6b4b33;
+            margin-top: 36px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 640px) {
+            .page-shell {
+                padding: 0 16px 32px;
+            }
+
+            .panel-body,
+            .detail-card {
+                padding: 24px;
+            }
+
+            .section-title {
+                margin-bottom: 16px;
+            }
+        }
+        
+        /* New UI Styles */
+        .top-layout-container {
+            display: flex;
+            gap: 30px;
+            background-color: #f3eadb;
+            background-size: cover;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #e0d0c0;
+        }
+        .left-col {
+            flex: 0 0 35%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .brown-panel-new {
+            background: #623d22;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .brown-panel-header-new {
+            background: #be8e56;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 12px;
+            text-transform: uppercase;
+        }
+        .brown-panel-body-new {
+            padding: 20px 24px;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        .right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .collage-section {
+            position: relative;
+            margin-top: 10px;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+        .main-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+        .gramophone-img {
+            position: absolute;
+            left: -130px;
+            bottom: -30px;
+            width: 220px;
+            z-index: 10;
+            filter: drop-shadow(4px 10px 8px rgba(0,0,0,0.4));
+        }
+        .circle-imgs {
+            position: absolute;
+            right: -60px;
+            bottom: -70px;
+            display: flex;
+            align-items: flex-end;
+        }
+        .circle-1 {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid #a37542;
+            object-fit: cover;
+            position: relative;
+            right: -25px;
+            z-index: 5;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .circle-2 {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #a37542;
+            object-fit: cover;
+            z-index: 6;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .vision-mission-core {
+            display: flex;
+            margin-top: 100px;
+            padding: 0 10px;
+        }
+        .vm-left {
+            flex: 1;
+            text-align: center;
+            padding-right: 30px;
+        }
+        .vm-right {
+            flex: 1;
+            padding-left: 30px;
+            border-left: 1px solid #cbb8a2;
+        }
+        .vm-title {
+            font-family: 'Times New Roman', serif;
+            color: #4a2f1d;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            margin-top: 0;
+            letter-spacing: 0.05em;
+        }
+        .vm-text {
+            font-size: 0.85rem;
+            color: #5c402d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .core-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.85rem;
+            color: #5c402d;
+            line-height: 1.6;
+        }
+        .core-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 14px;
+        }
+        .core-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #5c402d;
+        }
+        @media (max-width: 980px) {
+            .top-layout-container {
+                flex-direction: column;
+            }
+            .gramophone-img { display: none; }
+            .circle-imgs { position: static; justify-content: center; margin-top: 20px; }
+            .vision-mission-core { flex-direction: column; margin-top: 40px; }
+            .vm-right { border-left: none; padding-left: 0; border-top: 1px solid #cbb8a2; padding-top: 20px; margin-top: 20px; }
+            .vm-left { padding-right: 0; }
+            .content-section, .content-section.reverse { flex-direction: column; }
+            .section-header-bar { position: relative; top: 0; }
+            .lamp-icon { display: none; }
+            .col-photo, .col-paper { padding: 40px; }
+            .photo-secondary { position: relative; bottom: 0; right: 0; width: 100%; margin-top: -50px; }
+            .photo-main { width: 100%; }
+        }
+
+        .content-section {
+            position: relative;
+            margin-bottom: 80px;
+            display: flex;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .content-section.reverse {
+            flex-direction: row-reverse;
+        }
+        .section-header-bar {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            background: #b8864f;
+            color: white;
+            text-align: center;
+            padding: 16px 0;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            z-index: 20;
+        }
+        .lamp-icon {
+            position: absolute;
+            top: -10px;
+            width: 150px;
+            z-index: 25;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+        }
+        .lamp-right {
+            right: 0;
+            transform: scaleX(-1);
+        }
+        .lamp-left {
+            left: 0;
+        }
+        .col-photo {
+            flex: 1;
+            padding: 100px 40px 40px;
+            position: relative;
+            min-height: 500px;
+        }
+        .col-paper {
+            flex: 1;
+            padding: 120px 40px 40px;
+            background: #f3eadb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .illustration {
+            max-height: 180px;
+            margin-bottom: 30px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+        .section-paragraph {
+            font-size: 1.05rem;
+            color: #5c402d;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        .photo-main {
+            width: 80%;
+            height: 340px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+        .photo-secondary {
+            position: absolute;
+            width: 60%;
+            height: 240px;
+            object-fit: cover;
+            bottom: 40px;
+            right: 20px;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        .photo-full {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-shell">
+        <div class="hero-banner">Welcome to MappleWood Academy</div>
+
+        <div class="top-layout-container">
+            <div class="left-col">
+                <div class="brown-panel-new">
+                    <div class="brown-panel-header-new">About Us</div>
+                    <div class="brown-panel-body-new">
+                        <p>At Mapplewood Academy, every space invites you into a unique experience — the Library offers quiet reflection and endless knowledge, the Classroom sparks curiosity and lively discussion, the Canteen fills with laughter and shared meals, the Campus surrounds you with vibrant community and golden pathways, and the Office stands as the heart of leadership and guidance where ideas take shape.</p>
+                    </div>
+                </div>
+                <div class="brown-panel-new">
+                    <div class="brown-panel-header-new">History</div>
+                    <div class="brown-panel-body-new">
+                        <p>MappleWood Academy was founded with the belief that education should inspire both the mind and the spirit. From its humble beginnings, it has evolved into a distinguished institution recognized for its commitment to academic rigor, holistic development, and forward-thinking approaches. Its legacy continues to be built on fostering imagination, discipline, and leadership in every generation of learners.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="collage-section">
+                    <img src="src/images/design.png" alt="Gramophone" class="gramophone-img">
+                    <img src="src/images/school-bg.jpg" alt="School" class="main-img">
+                    <div class="circle-imgs">
+                        <img src="src/images/school-pic2.png" alt="Campus view 1" class="circle-1">
+                        <img src="src/images/school-pic3.jpg" alt="Campus view 2" class="circle-2">
+                    </div>
+                </div>
+
+                <div class="vision-mission-core">
+                    <div class="vm-left">
+                        <h4 class="vm-title">VISION</h4>
+                        <p class="vm-text">To be a leading academy that blends tradition with innovation, cultivating individuals who excel academically, grow personally, and contribute meaningfully to society.</p>
+                        
+                        <h4 class="vm-title">MISSION</h4>
+                        <p class="vm-text">MappleWood Academy delivers a holistic education that balances knowledge, creativity, and values.</p>
+                        <p class="vm-text">We inspire students to pursue excellence through curiosity, collaboration, and innovation while cultivating integrity, responsibility, and resilience in every learner.</p>
+                    </div>
+                    
+                    <div class="vm-right">
+                        <h4 class="vm-title" style="text-align: center;">CORE VALUES</h4>
+                        <ul class="core-list">
+                            <li><strong>Excellence</strong> — We strive for the highest standards in academics, creativity, and character.</li>
+                            <li><strong>Integrity</strong> — Honesty, responsibility, and ethical conduct guide every action.</li>
+                            <li><strong>Innovation</strong> — We embrace imagination and forward-thinking approaches to learning.</li>
+                            <li><strong>Community</strong> — Collaboration, respect, and inclusivity strengthen our academy.</li>
+                            <li><strong>Resilience</strong> — We nurture perseverance and adaptability in the face of challenges.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Library Section -->
+        <div class="content-section">
+            <div class="section-header-bar">MAPPLEWOOD LIBRARY</div>
+            <img src="src/images/lamp.png" class="lamp-icon lamp-right" alt="Lamp">
+            
+            <div class="col-photo">
+                <img src="src/images/school-pic6.jpg" alt="Library Arch" class="photo-main">
+                <img src="src/images/school-pic8.jpg" alt="Students studying" class="photo-secondary">
+            </div>
+            
+            <div class="col-paper">
+                <img src="src/images/books.png" alt="Books" class="illustration">
+                <p class="section-paragraph">
+                    The Library at MappleWood Academy is envisioned as the heart of learning and imagination. It is more than just a collection of books — it is a sanctuary where students immerse themselves in knowledge, explore new ideas, and cultivate a lifelong love for reading and research. Designed with a balance of tradition and modernity, the library offers quiet study areas, collaborative spaces, and resources that support both academic excellence and creative exploration.
+                </p>
+            </div>
+        </div>
+
+        <!-- Canteen Section -->
+        <div class="content-section reverse">
+            <div class="section-header-bar">MAPPLEWOOD CANTEEN</div>
+            <img src="src/images/lamp.png" class="lamp-icon lamp-left" alt="Lamp">
+            
+            <div class="col-photo">
+                <img src="src/images/school-pic4.jpg" alt="Canteen Hall" class="photo-main">
+                <img src="src/images/school-pic5.png" alt="Students Dining" class="photo-secondary">
+            </div>
+            
+            <div class="col-paper">
+                <img src="src/images/dining.png" alt="Dining Table" class="illustration">
+                <p class="section-paragraph">
+                    The canteen at MappleWood Academy is more than a dining hall — it is a lively hub of community and connection. Here, students gather to share meals, exchange ideas, and build friendships in a warm and welcoming atmosphere. Designed to balance comfort and functionality, the canteen reflects the academy’s values of togetherness and well-being, offering a space where nourishment and camaraderie go hand in hand.
+                </p>
+            </div>
+        </div>
+
+        <!-- Office Section -->
+        <div class="content-section">
+            <div class="section-header-bar">MAPPLEWOOD OFFICE</div>
+            <img src="src/images/lamp.png" class="lamp-icon lamp-right" alt="Lamp">
+            
+            <div class="col-photo">
+                <img src="src/images/school-pic10.jpg" alt="Office Interior" class="photo-full">
+            </div>
+            
+            <div class="col-paper">
+                <img src="src/images/paper.png" alt="Wax Seal" class="illustration">
+                <p class="section-paragraph">
+                    The office at MappleWood Academy serves as the center of leadership and guidance, where vision and purpose are shaped into action. It is a space that reflects professionalism and integrity, providing students, faculty, and staff with the support they need to thrive. More than just an administrative hub, the office embodies the academy’s values of excellence, responsibility, and innovation, ensuring that every decision contributes to the growth of the community and the success of its learners.
+                </p>
+            </div>
+        </div>
+
+        <!-- Classroom Section -->
+        <div class="content-section reverse">
+            <div class="section-header-bar">MAPPLEWOOD CLASSROOM</div>
+            <img src="src/images/lamp.png" class="lamp-icon lamp-left" alt="Lamp">
+            
+            <div class="col-photo">
+                <img src="src/images/school-pic1.png" alt="Classroom" class="photo-full">
+            </div>
+            
+            <div class="col-paper">
+                <img src="src/images/school.png" alt="Desks" class="illustration">
+                <p class="section-paragraph">
+                    The classroom at MappleWood Academy is the heart of learning, where curiosity sparks discovery and imagination fuels growth. It is a dynamic space designed to encourage collaboration, critical thinking, and creativity, guided by educators who inspire students to reach their fullest potential. More than a place of instruction, the classroom embodies the academy’s commitment to excellence, shaping minds and character to prepare learners for the challenges of tomorrow.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">MappleWood Academy • A warm, timeless learning experience</div>
+    </div>
+</body>
+
+</html>

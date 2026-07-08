@@ -1,14 +1,19 @@
-// Configuration
-const API_BASE_URL = 'http://localhost:5024';
+// Configuration is now loaded from config.js (window.API_BASE_URL)
+const API_BASE_URL = window.API_BASE_URL;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Add smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetSelector = this.getAttribute('href');
+            const targetElement = targetSelector ? document.querySelector(targetSelector) : null;
+
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
