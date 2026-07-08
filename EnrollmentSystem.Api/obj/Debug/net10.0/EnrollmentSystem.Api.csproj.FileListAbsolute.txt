@@ -123,3 +123,4 @@ C:\Users\Grachelle Mae\enrollment-system\EnrollmentSystem.Api\obj\Debug\net10.0\
 C:\Users\Grachelle Mae\enrollment-system\EnrollmentSystem.Api\bin\Debug\net10.0\BCrypt-Net-Next.dll
 C:\Users\Grachelle Mae\enrollment-system\EnrollmentSystem.Api\obj\Debug\net10.0\EnrollmentSystem.Api.sourcelink.json
 C:\Users\Grachelle Mae\enrollment-system\EnrollmentSystem.Api\bin\Debug\net10.0\EnrollmentSystem.Api.staticwebassets.runtime.json
+C:\Users\Grachelle Mae\enrollment-system\EnrollmentSystem.Api\bin\Debug\net10.0\appsettings.Production.json
