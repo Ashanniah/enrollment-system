@@ -3,4 +3,4 @@
 
 // Change this to your production Azure App Service URL when deployed
 // Example: 'https://enrollment-system-api.azurewebsites.net'
-window.API_BASE_URL = 'http://localhost:5024';
+window.API_BASE_URL = 'https://mapplewood-api-bfbgdscbexh9cwcn.centralus-01.azurewebsites.net';
