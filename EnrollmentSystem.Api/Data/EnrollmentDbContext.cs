@@ -13,6 +13,8 @@ public class EnrollmentDbContext : DbContext
     public DbSet<Student> Students { get; set; } = null!;
     public DbSet<Subject> Subjects { get; set; } = null!;
     public DbSet<Course> Courses { get; set; } = null!;
+    public DbSet<Department> Departments { get; set; } = null!;
+    public DbSet<Degree> Degrees { get; set; } = null!;
     public DbSet<YearLevel> YearLevels { get; set; } = null!;
     public DbSet<Enrollment> Enrollments { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
@@ -41,21 +43,41 @@ public class EnrollmentDbContext : DbContext
             new User { Id = 2, Email = "john@mapplewood.edu", PasswordHash = hash123, Role = "Student" }
         );
 
+        // Seed Departments
+        modelBuilder.Entity<Department>().HasData(
+            new Department { Id = 1, Code = "ccs", Name = "Computer Studies" },
+            new Department { Id = 2, Code = "ccj", Name = "Criminology" },
+            new Department { Id = 3, Code = "cas", Name = "Arts & Sciences" },
+            new Department { Id = 4, Code = "cba", Name = "Business" },
+            new Department { Id = 5, Code = "ced", Name = "Education" },
+            new Department { Id = 6, Code = "coe", Name = "Engineering" },
+            new Department { Id = 7, Code = "cthm", Name = "Tourism & Hospitality Management" },
+            new Department { Id = 8, Code = "chs", Name = "Health Sciences" }
+        );
+
+        // Seed Degrees
+        modelBuilder.Entity<Degree>().HasData(
+            new Degree { Id = 1, Code = "bs", Name = "Bachelor of Science" },
+            new Degree { Id = 2, Code = "ba", Name = "Bachelor of Arts" },
+            new Degree { Id = 3, Code = "bsed", Name = "Bachelor in Secondary Education" },
+            new Degree { Id = 4, Code = "beed", Name = "Bachelor in Elementary Education" }
+        );
+
         // Seed Courses
         modelBuilder.Entity<Course>().HasData(
-            new Course { Id = 1, Name = "Bachelor of Science in Information Technology" },
-            new Course { Id = 2, Name = "Bachelor of Science in Criminology" },
-            new Course { Id = 3, Name = "Bachelor of Science in Psychology" },
-            new Course { Id = 4, Name = "Bachelor of Science in Computer Science" },
-            new Course { Id = 5, Name = "Bachelor of Science in Accountancy" },
-            new Course { Id = 6, Name = "Bachelor in Secondary Education" },
-            new Course { Id = 7, Name = "Bachelor in Elementary Education" },
-            new Course { Id = 8, Name = "Bachelor of Science in Civil Engineering" },
-            new Course { Id = 9, Name = "Bachelor of Science in Computer Engineering" },
-            new Course { Id = 10, Name = "Bachelor of Science in Tourism Management" },
-            new Course { Id = 11, Name = "Bachelor of Science in Hospitality Management" },
-            new Course { Id = 12, Name = "Bachelor of Science in Nursing" },
-            new Course { Id = 13, Name = "Bachelor of Science in Business Administration" }
+            new Course { Id = 1, Name = "Bachelor of Science in Information Technology", DepartmentId = 1, DegreeId = 1 },
+            new Course { Id = 2, Name = "Bachelor of Science in Criminology", DepartmentId = 2, DegreeId = 1 },
+            new Course { Id = 3, Name = "Bachelor of Science in Psychology", DepartmentId = 3, DegreeId = 1 },
+            new Course { Id = 4, Name = "Bachelor of Science in Computer Science", DepartmentId = 1, DegreeId = 1 },
+            new Course { Id = 5, Name = "Bachelor of Science in Accountancy", DepartmentId = 4, DegreeId = 1 },
+            new Course { Id = 6, Name = "Bachelor in Secondary Education", DepartmentId = 5, DegreeId = 3 },
+            new Course { Id = 7, Name = "Bachelor in Elementary Education", DepartmentId = 5, DegreeId = 4 },
+            new Course { Id = 8, Name = "Bachelor of Science in Civil Engineering", DepartmentId = 6, DegreeId = 1 },
+            new Course { Id = 9, Name = "Bachelor of Science in Computer Engineering", DepartmentId = 6, DegreeId = 1 },
+            new Course { Id = 10, Name = "Bachelor of Science in Tourism Management", DepartmentId = 7, DegreeId = 1 },
+            new Course { Id = 11, Name = "Bachelor of Science in Hospitality Management", DepartmentId = 7, DegreeId = 1 },
+            new Course { Id = 12, Name = "Bachelor of Science in Nursing", DepartmentId = 8, DegreeId = 1 },
+            new Course { Id = 13, Name = "Bachelor of Science in Business Administration", DepartmentId = 4, DegreeId = 1 }
         );
 
         // Seed Year Levels

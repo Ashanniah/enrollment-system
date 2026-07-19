@@ -99,6 +99,18 @@ app.MapGet("/api/yearlevels", async (EnrollmentDbContext db) =>
 })
 .WithName("GetYearLevels");
 
+app.MapGet("/api/departments", async (EnrollmentDbContext db) =>
+{
+    return await db.Departments.OrderBy(d => d.Id).ToListAsync();
+})
+.WithName("GetDepartments");
+
+app.MapGet("/api/degrees", async (EnrollmentDbContext db) =>
+{
+    return await db.Degrees.OrderBy(d => d.Id).ToListAsync();
+})
+.WithName("GetDegrees");
+
 app.MapGet("/api/courses/{courseId}/subjects", async (int courseId, EnrollmentDbContext db) =>
 {
     return await db.Subjects.Where(s => s.CourseId == courseId).OrderBy(s => s.Id).ToListAsync();
